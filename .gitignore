@@ -2,8 +2,8 @@
 Dagboksmall.docx
 Dixon-K-Function (1).pdf
 Dixon-K-Function.pdf
-ERIKA.rds
-ERIKA_np.txt
+# ERIKA.rds
+# ERIKA_np.txt
 MVEX11_VT25_18_Dagbok__all_edit_.pdf
 Planeringsrapport SEEX16-25-10.pdf
 Projektplan_kandidatarbete (1).pdf
@@ -11,19 +11,27 @@ Projektplan_kandidatarbete.pdf
 chalmers-university-of-technology-master-thesis-template-2021.pdf
 code.r
 copy.txt
+# dataframes
 fack2.md
 fack2.pdf
+facklecture3.md
 feb20.md
+fig
 gruppkontrakt.docx
 ieee-style-guide.pdf
+# jupyter
 kallkritik-ai.md
 lectures.md
-lisa-feb.R
-mvex011_feb.R
-mvex011_mar.R
+# lisa-feb.R
+lp4.ipynb
+# mvex011_feb.R
+# mvex011_mar.R
 project.log
 pyreader_data.rds
-python-data
+# python-data
+# python-fig
+# rfiles
+tenta_lp4.ipynb
 ves13-dbh.png
 ves13-poissonoffspring-normaldist.png
 webp.log
