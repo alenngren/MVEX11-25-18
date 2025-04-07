@@ -12,6 +12,8 @@ file_path <- "/Users/alexander/Chalmers/MVEX11-25-18/python-data/"
 ERIKA <- readRDS(filename)
 modelves13 <- read.csv(path_csv)
 
+
+
 # df <- read_feather(path)
 
 
@@ -20,7 +22,12 @@ modelves13 <- read.csv(path_csv)
 x <- ERIKA$VES13$small$x
 y <- ERIKA$VES13$small$y
 
+x_evo03 <- ERIKA$EVO03$small$x
+y_evo03 <- ERIKA$EVO03$small$y
+
 X <- ppp(x=x, y=y, window=square(40))
+X_evo03 <- ppp(x=x_evo03, y=y_evo03, window=square(40))
+
 plot(X, main='data')
 
 K <- Kest(X, correction="Ripley")
@@ -307,7 +314,17 @@ matris_skalad <- matrix(kordinater$skalad_lamda1,
                         ncol = dim(densitet$v)[2], 
                         byrow = FALSE)
 skalad_lamda2 <- im(matris_skalad, xcol = densitet$xcol, yrow = densitet$yrow)
-LGCP <- rpoispp(lambda = skalad_lamda2, win = window)
+LGCP <- rpoispp(lambda = skalad_lamda2, win = window) # X patter
+
+# this is the ppp pattern. Plot L med mats data 
+plot(LGCP)
+
+E_lgcp <- envelope(LGCP, Kest, nsim=999, verbose=TRUE)
+E_lgcp_evo013 <- envelope(LGCP, Kest, nsim=999, verbose=TRUE)
+
+E <- envelope(X, Kest, nsim=999, verbose=TRUE)
+plot(E, sqrt(./pi) -r  ~ r, main = 'L ~ med iterativ', legend = FALSE) 
+lines(E_lgcp$r, sqrt(E_lgcp$obs/pi) -E_lgcp$r , col = jet_colors[1], lty = 2, lwd = 2)
 
 
 par(mfrow=c(1,3))
@@ -321,7 +338,7 @@ plot(all_ves13)
 plot(all_lgcp)
 
 
-E <- envelope(ppp_data, Kest, correction="border", nsim=9999)
+E <- envelope(ppp_data, Kest, correction="border", nsim=999)
 # E <- envelope(X, Lest, nsim=99, verbose=FALSE)
 E_thomas <- envelope(thomas_process, Kest, nsim=9999)
 E_half <- envelope(halfway_thomas, Kest, nsim=9999)
