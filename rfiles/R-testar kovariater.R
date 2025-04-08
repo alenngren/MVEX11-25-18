@@ -1,16 +1,38 @@
 library(spatstat)
 library(mgcv)
 
-events <- read.csv("C:/Users/matti/Downloads/VES13_small.csv")
-events$pt <- 1         
-events$wt <- 1e-6      
+library(spatstat)
+# install.packages("feather")
+# install.packages("spatstat")
+
+
+filename <- "/Users/alexander/Chalmers/MVEX11-25-18/ERIKA.rds"
+
+ERIKA <- readRDS(filename)
+
+x <- ERIKA$VES13$small$x
+y <- ERIKA$VES13$small$y
+
+
+
+events <- data.frame(x = x, y = y) # alex fix 
+
+
+# events <- read.csv("C:/Users/matti/Downloads/VES13_small.csv")
+events$pt <- 1      
+events$wt <- 1e-6
 
 xrange <- range(events$x)
 yrange <- range(events$y)
 area   <- diff(xrange) * diff(yrange)
 W      <- owin(xrange, yrange)  
 
-bigTrees <- read.csv("C:/Users/matti/Downloads/VES13_large.csv")
+x_big <- ERIKA$VES13$large$x
+y_big <- ERIKA$VES13$large$y
+dbh_big <- ERIKA$VES13$large$dbh
+bigTrees <- data.frame(x=x_big, y=y_big, dbh=dbh_big) # my version 
+bigTrees$dbh
+# bigTrees <- read.csv("C:/Users/matti/Downloads/VES13_large.csv")
 
 print(names(bigTrees))
 
@@ -37,7 +59,7 @@ dat$C <- mapply(
   computeCovariate, 
   dat$x, 
   dat$y,
-  MoreArgs = list(bigTrees = bigTrees, theta = theta)
+  MoreArgs = list(bigTrees = bigTrees, theta = t)
 )
 
 fit <- gam(
@@ -59,7 +81,7 @@ grid$C <- mapply(
   computeCovariate,
   grid$x,
   grid$y,
-  MoreArgs = list(bigTrees = bigTrees, theta = theta)
+  MoreArgs = list(bigTrees = bigTrees, theta = t)
 )
 
 grid$intensity <- predict(fit, newdata = grid, type = "response")
