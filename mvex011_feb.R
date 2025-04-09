@@ -22,7 +22,7 @@ plot(K, sqrt(./pi) -r ~ r, ylab="L(r) - r ", main="L(r) - r ~ VES13")
 
 online <- interactive()
 Nsim <- if(online) 19 else 3
-en <- envelope(X, nsim=19)
+en <- envelope(X, nsim=99)
 plot(en, main="VES13 - Envelope of K function with CSR")
 
 data(ERIKA$VES13$large)
@@ -56,9 +56,7 @@ fitT # uniform intensity = lambda, kappa = intensity of parents points, scale = 
 ## Plot för k function istället 
 
 plot(K, main="K function for VES13")
-plot(K, main="K function for VES13")
-plot(K, main="K function for VES13")
-plot(K, main="K function for VES13")
+
 
 
 ves13 <- allstats(X, dataname='VES13')

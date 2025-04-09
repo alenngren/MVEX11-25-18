@@ -3,7 +3,6 @@ library(spatstat)
 # install.packages("feather")
 install.packages("spatstat")
 
-
 filename <- "/Users/alexander/Chalmers/MVEX11-25-18/ERIKA.rds"
 path <- "/Users/alexander/Chalmers/MVEX11-25-18/python-data/ves13-thomasprocess-modified.feather"
 path_csv <- "/Users/alexander/Chalmers/MVEX11-25-18/python-data/ves13-thomasprocess-modified.csv"
@@ -11,43 +10,27 @@ file_path <- "/Users/alexander/Chalmers/MVEX11-25-18/python-data/"
 
 ERIKA <- readRDS(filename)
 modelves13 <- read.csv(path_csv)
-
-
-
-# df <- read_feather(path)
-
-
-
-
-x <- ERIKA$VES13$small$x
-y <- ERIKA$VES13$small$y
+x_c <- modelves13$x
+y_c <- modelves13$y
 
 x_evo03 <- ERIKA$EVO03$small$x
 y_evo03 <- ERIKA$EVO03$small$y
-
-X <- ppp(x=x, y=y, window=square(40))
 X_evo03 <- ppp(x=x_evo03, y=y_evo03, window=square(40))
 
-plot(X, main='data')
+x <- ERIKA$VES13$small$x
+y <- ERIKA$VES13$small$y
+X <- ppp(x=x, y=y, window=square(40))
 
-K <- Kest(X, correction="Ripley")
-# K <- Kest(cells, correction="isotropic")
+
+plot(X, main='data')
 # plot(K, main="K function for VES13")
 plot(K, sqrt(./pi) -r ~ r, ylab="L(r) - r ", main="L(r) - r ~ VES13")
-
 # fitT <- kppm(V13~1, "Thomas")
-
-x_c <- modelves13$x
-y_c <- modelves13$y
 
 X_csv <- ppp(x=x_c, y=y_c, window=square(40))
 plot(X_csv, main="VES13 model 1")
 K_csv <- Kest(X_csv, correction="Ripley")
 plot(K_csv, sqrt(./pi) -r ~ r, ylab="L(r) - r ", main="L(r) - r ~ VES13 Model 1")
-
-# li = Lest(X)
-# plot(li -r ~r)
-K_csv
 
 # från lisa 
 window <- owin(c(0, 40), c(0, 40)) #creating the window
@@ -61,7 +44,6 @@ parent_x <- ERIKA$VES13$large$x
 parent_y <- ERIKA$VES13$large$y
 distances <- sqrt((offspring_x - parent_x)^2 + (offspring_y - parent_y)^2)
 sigma_hat <- sd(distances)
-
 
 #Simulate parent points
 num_parents <- rpois(1, lambda_p_hat * area.owin(window))  # Poisson-distributed parent count
@@ -166,19 +148,14 @@ plot(K_halfthomas, sqrt(./pi) -r ~ r, ylab="L(r) - r ", main="L-r, halfway Thoma
 data_file <- "/Users/alexander/Downloads/"
 
 write.csv(halfway_thomas, paste(data_file,"half_thomas_points.csv"))
-
-## Plot för k function istället 
-
+## Plot för k function istället
 
 plot(K, main="K function for VES13")
 plot(K_csv, main="K function for VES13", add=TRUE, col='blue')
 plot(K_thomas, main="K function for VES13", add=TRUE, col='red')
 plot(K_halfthomas, main="K function for VES13", add=TRUE, col='green')
-
-
 # plot(Kest(X))
 # plot(Kest(halfway_thomas))
-
 swp <- rescale(X)
 Kvb <- varblock(swp, Kest, nx=3, ny=3)
 Kloh <- lohboot(swp, Kest)
