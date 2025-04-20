@@ -295,7 +295,7 @@ LGCP <- rpoispp(lambda = skalad_lamda2, win = window) # X patter
 
 # this is the ppp pattern. Plot L med mats data 
 plot(LGCP)
-
+print(LGCP)
 E_lgcp <- envelope(LGCP, Kest, nsim=999, verbose=TRUE)
 E_lgcp_evo013 <- envelope(LGCP, Kest, nsim=999, verbose=TRUE)
 
