@@ -299,13 +299,6 @@ legend("topleft", legend = c("VES13", "Iterativ 1", "Iterativ 6", "Iterativ 11")
 
 
 
-# Clark Evans statistics 
-clarkevans.test(X_iter, alternative="clustered")
-clarkevans.test(X_iter0, alternative="clustered")
-clarkevans.test(X_iter5, alternative="clustered")
-clarkevans.test(X_iter10, alternative="clustered")
-       
-
 # LGPC modell (mats) -----
 window <- owin(range(x), range(y))
 
@@ -387,13 +380,98 @@ points(barn$x, barn$y, col = "black", pch = 1)
 Xlambda <- ppp(x=barn$x, y=barn$y, window=square(40))
 Xlambda
 
-# Alla point patterns X ppp 
-thomas_process
-halfway_thomas
-simulated_ppp
-X_iter10
-Xlambda
-LGCP
+# ALLA POINT PATTERNS X, thomas_process, halfway_thomas, simulated_ppp, X_iter10, Xlambda, LGCP ----
+X # ves13
+thomas_process # omodifierad
+halfway_thomas # lisas halvvägs
+simulated_ppp # thomasproc
+X_iter10 # iterativ 10
+Xlambda # mats lambda fält
+LGCP # mats lgcp 
+
+
+# Clark Evans statistics ----
+# clarkevans.test(X_iter, alternative="clustered")
+# clarkevans.test(X_iter0, alternative="clustered")
+# clarkevans.test(X_iter5, alternative="clustered")
+# clarkevans.test(X_iter10, alternative="clustered")
+
+ce_x <- clarkevans.test(X, alternative="clustered")
+ce_omod <- clarkevans.test(thomas_process, alternative="clustered")
+ce_thom <- clarkevans.test(simulated_ppp, alternative="clustered")
+ce_halv <- clarkevans.test(halfway_thomas, alternative="clustered")
+
+n <- 13
+jet_colors <- tim.colors(n)
+
+# Manually build the color vector first to be sure it's correct
+my_colors <- c("black", jet_colors[6], jet_colors[7], jet_colors[8])
+
+df <- data.frame(
+  score = c(ce_x$statistic, ce_thom$statistic, ce_omod$statistic, ce_halv$statistic),
+  type = c('VES13', 'Thomas', 'Omodifierad', 'Halvvägs'),
+  stringsAsFactors = FALSE # important to avoid factor issues!
+)
+
+# setwd("/Users/alexander/Chalmers/MVEX11-25-18/fig")
+setEPS()
+postscript("CE-thomas.eps", width = 6, height = 3.7) # square , width = 6, height = 3.7
+# Create the barplot with individual bar colors
+ce_bar <- barplot(height=df$score, names.arg=df$type,
+                  col=my_colors,
+                  xlab="punktprocesser",
+                  ylab="R värde",
+                  main="Clark-Evans test för Thomasprocesser",
+                  ylim=c(0,1)
+)
+
+# Add text labels for R values
+text(ce_bar, df$score,
+     labels=paste("R=", round(df$score, 2), sep=""),
+     pos=1, cex=1.2, col=c("white", "black", "black", "black"))
+
+dev.off()
+
+# Clark Evans för bästa samtliga modeller (alternativ sätt ihop alla) ----
+# ce_x <- clarkevans.test(X, alternative="clustered")
+ce_iter10 <- clarkevans.test(X_iter10, alternative="clustered") # 
+ce_lambda <- clarkevans.test(Xlambda, alternative="clustered")
+ce_lgcp <- clarkevans.test(LGCP, alternative="clustered")
+my_colors_proc <- c("black", jet_colors[6], jet_colors[2], jet_colors[10], jet_colors[11])
+
+df_proc <- data.frame(
+  score = c(ce_x$statistic, ce_thom$statistic, ce_iter10$statistic, ce_lambda$statistic, ce_lgcp$statistic),
+  type = c('VES13', 'Thomas', 'Iterativ (10)', 'Latenta fält', 'LGCP'),
+  stringsAsFactors = FALSE # important to avoid factor issues!
+)
+# utan ves13
+my_colors_proc <- c(jet_colors[6], jet_colors[2], jet_colors[10], jet_colors[11])
+df_proc <- data.frame( # utan ves13 
+  score = c(ce_thom$statistic, ce_iter10$statistic, ce_lambda$statistic, ce_lgcp$statistic),
+  type = c('Thomas', 'Iterativ (10)', 'Latenta fält', 'LGCP'),
+  stringsAsFactors = FALSE # important to avoid factor issues!
+)
+
+# setwd("/Users/alexander/Chalmers/MVEX11-25-18/fig")
+setEPS()
+postscript("CE-processes1.eps", width = 6, height = 3.7) # square , width = 6, height = 3.7
+# Create the barplot with individual bar colors
+ce_bar <- barplot(height=df_proc$score, names.arg=df_proc$type,
+                  col=my_colors_proc,
+                  xlab="punktprocesser",
+                  ylab="R värde",
+                  main="Clark-Evans test för punktprocesser",
+                  ylim=c(0,1)
+)
+abline(h = df$score[1], lwd=1, lty=3, col="black")
+
+# Add text labels for R values
+text(ce_bar, df_proc$score,
+     labels=paste("R=", round(df_proc$score, 2), sep=""),
+     pos=1, cex=1.2, col=c("white", "black", "black", "black", "black"))
+
+dev.off()
+
 
 # F function, empty space statistics -----
 Fest(X, ..., eps, r=NULL, breaks=NULL,

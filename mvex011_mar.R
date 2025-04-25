@@ -229,8 +229,8 @@ var2 <- 1:3
 
 df <- data.frame(
   score = c(ce_x$statistic, ce_tp$statistic, ce_csv$statistic, ce_half$statistic),
-  type = c('VES13', 'Thomasproces', 'Modifierad Thomas', 'Halfway Thomas')
-  
+  type = c('VES13', 'Thomasproces', 'Modifierad Thomas', 'Halfway Thomas'),
+  color
 )
                 
 
@@ -243,6 +243,178 @@ ce_bar <- barplot(height=df$score, names=type,
         ylim=c(0,1)
 )
 text(ce_bar, df$score, pos=1 , paste("R= ", round(df$score,2), sep="") ,cex=1.2) 
+
+
+# Define a vector of colors (same length as your bars)
+colors <- c("red", "blue", "green", "orange", "purple")
+
+# Then use it in the barplot
+ce_bar <- barplot(height=df$score, names=type, 
+                  col=colors,
+                  xlab="punktmönster", 
+                  ylab="R värde", 
+                  main="Clark-Evans test", 
+                  ylim=c(0,1)
+)
+
+# Add text labels
+text(ce_bar, df$score, pos=1 , paste("R= ", round(df$score,2), sep="") ,cex=1.2)
+
+
+# Define bar colors — first is black, rest are as you like
+colors <- c("black", "blue", "green", "orange", "purple")
+library(fields)
+# jet_colors <- tim.colors(10)
+n <- 13
+jet_colors <- tim.colors(n)
+
+# Create the barplot with individual bar colors
+ce_bar <- barplot(height=df$score, names=type, 
+                  col=colors,
+                  xlab="punktprocess", 
+                  ylab="R värde", 
+                  main="Clark-Evans test", 
+                  ylim=c(0,1)
+)
+
+# Define text colors — first is white, rest are black
+text_colors <- c("white", rep("black", length(df$score) - 1))
+
+# Add text labels with custom colors
+text(ce_bar, df$score, pos=1, 
+     labels=paste("R= ", round(df$score, 2), sep=""),
+     cex=1.2,
+     col=text_colors)
+
+# Clark-evans cool plot ----
+library(fields)
+n <- 13
+jet_colors <- tim.colors(n)
+df <- data.frame(
+  score = c(ce_x$statistic, ce_tp$statistic, ce_csv$statistic, ce_half$statistic),
+  type = c('VES13', 'Thomasproces', 'Modifierad Thomas', 'Halfway Thomas'),
+  colors = c("black", jet_colors[6:9])
+)
+
+# Create the barplot with individual bar colors
+ce_bar <- barplot(height=df$score, names=df$type, 
+                  col=df$colors,
+                  xlab="punktprocess", 
+                  ylab="R värde", 
+                  main="Clark-Evans test", 
+                  ylim=c(0,1)
+)
+
+text_colors <- c("white", rep("black", length(df$score) - 1))
+
+# Add text labels with custom colors
+text(ce_bar, df$score, pos=1, 
+     labels=paste("R= ", round(df$score, 2), sep=""),
+     cex=1.2,
+     col=text_colors)
+
+
+
+
+library(fields)
+
+# Number of colors in the palette
+n <- 13
+jet_colors <- tim.colors(n)
+
+# Manually build the color vector first to be sure it's correct
+my_colors <- c("black", jet_colors[6], jet_colors[7], jet_colors[8])
+
+df <- data.frame(
+  score = c(ce_x$statistic, ce_tp$statistic, ce_csv$statistic, ce_half$statistic),
+  type = c('VES13', 'Omodifierad', 'Modifierad', 'Halvvägs'),
+  stringsAsFactors = FALSE # important to avoid factor issues!
+)
+
+setwd("/Users/alexander/Chalmers/MVEX11-25-18/fig")
+setEPS()
+postscript("CE-thomas.eps", width = 6, height = 3.7) # square , width = 6, height = 3.7
+# Create the barplot with individual bar colors
+ce_bar <- barplot(height=df$score, names.arg=df$type,
+                  col=my_colors,
+                  xlab="punktprocesser",
+                  ylab="R värde",
+                  main="Clark-Evans test för Thomasprocesser",
+                  ylim=c(0,1)
+)
+
+# Add text labels for R values
+text(ce_bar, df$score,
+     labels=paste("R=", round(df$score, 2), sep=""),
+     pos=1, cex=1.2, col=c("white", "black", "black", "black"))
+
+dev.off()
+
+
+
+library(fields)
+
+# Number of colors in the palette
+n <- 13
+jet_colors <- tim.colors(n)
+
+# Create the data frame
+df <- data.frame(
+  score = c(ce_x$statistic, ce_tp$statistic, ce_csv$statistic, ce_half$statistic),
+  type = c('VES13', 'Thomasprocess', 'Modifierad Thomas', 'Halfway Thomas'),
+  colors = c("black", jet_colors[6:9])
+)
+
+# Create the barplot with individual bar colors
+ce_bar <- barplot(height=df$score, names.arg=df$type,  # <- fixed this
+                  col=df$colors,
+                  xlab="punktprocess", 
+                  ylab="R värde", 
+                  main="Clark-Evans test", 
+                  ylim=c(0,1)
+)
+
+# Optional: Add text labels for R values
+text(ce_bar, df$score, 
+     labels=paste("R= ", round(df$score, 2)), 
+     pos=1, cex=1.2, col="white")
+
+
+dev.off()
+plot.new()  # Starts a new blank plot canvas
+
+# Load the fields package for tim.colors()
+library(fields)
+
+# Create a jet color palette with 10 colors
+n <- 13
+jet_colors <- tim.colors(n)
+
+# Simple reference barplot to show the color palette
+barplot(rep(1, n), 
+        col=jet_colors, 
+        names.arg=1:n, 
+        xlab="Color Index", 
+        ylab="Value", 
+        main=paste("Reference: jet_colors <- tim.colors(",n,")", sep=""), 
+        ylim=c(0, 1))
+
+# Optionally add color value labels
+# text(x=1:10, y=0.5, labels=1:10, col="white", cex=1.2)
+
+tim.colors(10) 
+# returns an array of 10 character strings encoding colors in hex format
+
+# e.g. (red, green,  blue) values of   (16,255, 239)
+#   translates to "#10FFEF" 
+# rgb( 16/255, 255/255, 239/255, alpha=.5)
+#   gives   "#10FFEF80"  note extra "alpha channel"
+
+
+
+
+
+
 
 install.packages("spatstat.core")
 library(spatstat.core)
