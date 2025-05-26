@@ -1,0 +1,581 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage[swedish]{babel}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{siunitx}
+
+\begin{document}
+
+\section*{Dagbok för MVEX11-VT25-18}
+
+\textbf{Gruppmedlemmar:} Lisa Magnusson, Amelia Jonsson, Alexander Lenngren och Mats Vallin Crnoja \\
+\textbf{Key:} s - sjuk
+
+
+\section*{Vecka 4 infört i dagboken av Amelia}
+
+\begin{tabular}{|p{2cm}|p{10cm}|p{3cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} \\
+\hline
+23/1 & Hade första mötet med Aila och ett gruppmöte efter det. Vi gick igenom projektbeskrivningen, fick boktips om punktmönster och diskuterade två relevanta frågeställningar. Skrev ett första utkast av gruppkontraktet som skickades till Aila för feedback. Till nästa gång (30/1) ska vi ha börjat fundera lite på planeringsrapporten samt ha gjort klart gruppkontraktet.  & Alla \\
+\hline
+  & Gjorde en mall för planeringsrapporten. & Alexander \\
+\hline
+ & Började läsa i boken och föreslagit olika metoder för identifiering av kluster samt modellering som kan passa vår data. & Mats \\
+\hline
+ 25/1 & Gjorde ändringar i gruppkontraktet enligt feedback från Aila och skickade den nya versionen till resten av gruppen. & Lisa \\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+\section*{Vecka 5 infört i dagboken av Lisa}
+
+\begin{tabular}{|p{2cm}|p{10cm}|p{3cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} \\
+\hline
+30/1 & Hade ett möte med Aila och ett kort gruppmöte efter det. Vi gick igenom gruppkontraktet snabbt och skrev på det, och pratade sedan en del om planeringsrapporten. Till nästa möte ska vi ha gjort klart planneringsrapporten och skickat till Aila innan så hon kan granska den.  & Alla \\
+\hline
+30/1 & Fixat till mallen för slutrapporten och ordnat med referenshantering. & Alexander \\
+\hline
+1/2 & Skickade in gruppkontraktet. & Lisa \\
+\hline
+1/2 & Skrev ett utkast av planeringsrapporten med hjälp av våra notiser och kommentarer från mötet. & Lisa \\
+\hline
+- & Började koda och titta på Gaussian mixture model clustering. & Mats \\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+\section*{Vecka 6 infört i dagboken av Alexander}
+
+\begin{tabular}{|p{2cm}|p{10cm}|p{3cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} \\
+\hline
+4/2 & Möte med gruppen för att sammanställa projektplanen och Lisa skickade utkast till Aila. Vi har sett över alla datum för handledning (tillfälle 1, tar de andra när aktuellt) och vilka förläsningar vi täcker. Till nästa möte torsdag behöver vi flytta möte med Aila eftersom det krockar LearningLabs informationssökning och akademisk integritet.  & Alla (-M s) \\
+\hline
+6/2 & LearningLabs (delade notes) & Amelia  \\
+\hline
+7/2 & Möte med Aila, kommentar kring projektbeskrivningen. & Alla (-M s) \\
+\hline
+7/2 & Föreläsning i Mendeley. (delade notes) & Lisa \\
+\hline
+7/2 & Fackspråksföreläsning 1: Projektdagbok (utvdiga med diskussion, idéer och fakta kring arbetet), återkoppling, och AI. (delade notes) & Alexander \\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+\section*{Vecka 7 infört i dagboken av Amelia}
+
+\begin{tabular}{|p{2cm}|p{10cm}|p{2cm}|p{2.5cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} & \textbf{Tid} \\
+\hline
+Genomgående under veckan & Läst i boken och markerat bra info. Letat fram fler referenser utifrån boken. & Lisa & 6 timmar \\
+\hline
+ 13/2-16/2 & Jobbat med spatstat och specifika funktioner relaterade till Thomas-processen i R. & Amelia & 8 timmar\\
+\hline
+Genomgående under veckan & Läst på och jobbat med Ripley's k-funktion. & Alexander & 2 timmar \\
+\hline
+Genomgående under veckan & Jobbat vidare med GMM med kovariater. & Mats & 30-40 timmar \\
+\hline
+13/2 & Bokade in ett gruppmöte den 17/2 för att se hur långt alla kommit, samt diskutera vad som behöver göras innan det första handledningstillfället. & Alla & \\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+\section*{Vecka 8 infört i dagboken av Mats}
+\begin{tabular}{|p{2cm}|p{8cm}|p{3cm}|p{2cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} & \textbf{Tid} \\
+\hline
+17/2 & Möte & Alla & 2 timmar\\
+\hline
+17/2 & Tittat på alla videos och gjort quiz/test om plagiering & Lisa & 1 timme\\
+\hline
+17/2 & Läste om shannon entropy och bayesian risk, skrev om GMM modellen& Mats & 3 timmar\\
+\hline
+18/2 & Gjort test/quiz om plagiering & Amelia och Alexander & 2 timmar \\
+\hline
+18/2 & Läste om att möjligtvis använda laplace approximation för att träna en thomas process & Mats & 1 timme\\
+\hline
+18/2 & Föreläsning om Källkritik och AI & Lisa, Amelia och Alexander & 1 timme \\
+\hline
+18/2 & Jobbat på rapporten och antecknat idér från boken & Lisa & 3 timmar\\
+\hline
+19/2 & Kodat och skrivit i rapporten & Lisa & 3 timmar\\
+\hline
+19/2 & Kodat Tomasprocessen och inhomogenitet & Lisa och Amelia & 3 timmar\\
+\hline
+19/2 & Skrivit i rapporten & Amelia & 3 timmar\\
+\hline
+20/2 & kodat en hierarchical modell som efterliknar thomasprocessen och skrev en del om GMM i rapporten & Mats & 4 timmar\\
+\hline
+20/2 & Suttit med modified thomas process & Lisa och Amelia & 1 timme\\
+\hline
+20/2 & Möte med Aila & Alla & 2 timmar\\
+\hline
+20/2 & Suttit med kommentarer på texten och förberedning inför handledningen & Lisa och Amelia  & 3 timmar \\
+\hline
+20/2 & Utvidgat modell för att mäta punktmöster som överlever  & Alexander & 3 timmar \\
+\hline
+21/2 & Försökt hitta andra modeller bland annat Markov clustering algorithm & Mats & 1-2 timmar \\
+\hline
+22/2 & Försökt fixa koden. lagt till extra delar i koden för GMM  & Mats & 2 timmar \\
+\hline
+23/2 & Försökt fixa koden. Undersökt kovarians matrisen för att se om det är problemet. Läst om OPTICS clustering algorithm  & Mats & 2 timmar \\
+\hline
+Hela veckan & Kommunicerat och diskuterat ideér, online och på plats  & Alla & 2 timmar \\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+\section*{Vecka 9 infört i dagboken av Lisa}
+\begin{tabular}{|p{2cm}|p{8cm}|p{3cm}|p{2cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} & \textbf{Tid} \\
+\hline
+24/2 & Läst om cox-processen och försökt koda en cox-thomas process & Mats & 2 timmar\\
+\hline
+24/02 & Förberett inför Handledningstillfälle 1  & Lisa, Alexander och Amelia & 3 timmar \\
+\hline
+25/02 & Handledningstillfälle 1  & Alla & 1 timme \\
+\hline
+24-26/2 & Thomasprocess och modifierad thomas i python  & Alexander & 9 timmar \\
+\hline
+28/2 & Alternativa metoder för punktmodeller  & Alexander & 3 timmar \\
+\hline
+25/2-1/3 & Göra en LGCP model och lära den  & Mats & 10 timmar \\
+\hline
+Hela veckan & Kommunicerat och diskuterat ideér, online och på plats  & Alla & 2 timmar \\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+
+\section*{Vecka 10 infört i dagboken av Alexander}
+\begin{tabular}{|p{2cm}|p{8cm}|p{3cm}|p{2cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} & \textbf{Tid} \\
+\hline
+3/3 & Kodat och tänkt på jämföra modeller och hur det visualiseras & Alexander & 2 timmar \\
+\hline
+5/3 & Kodat och diskuterat Thomas/Modifierad Thomas, och tittat på hur vi ska testa våra modeller & Alexander och Lisa & 2 timmar \\
+\hline
+5/3 & Kodat och diskuterat Thomas/Modifierad Thomas, och tittat på hur vi ska testa våra modeller & Alexander, Lisa och Amelia & 3 timmar \\
+\hline
+5/3 & Satt ihop mått för punktmönster om klustrat eller inte med visualisering & Alexander & 3 timmar \\
+\hline
+6/3 & Läste i boken & Lisa & 1 timme \\
+\hline
+6/3 & Facksråksföreläsning 2 & Alexander, Lisa och Amelia & 2 timmar \\
+\hline
+6/3 & Möte med Aila, uppdatering och kommentarer. & Alla & 2 timmar \\
+\hline
+6/3 & Programmerat och skrivit i rapporten & Alexander, Lisa och Amelia & 2 timmar \\
+\hline
+9/3 & Skrivit i rapporten, jobbat med hybrid thomasprocess och en iterativ poisson modell & Lisa, Alexander och Amelia & 10 timmar \\
+\hline
+Hela veckan & Jobbat vidare på LGCP modellen & Mats & 10 timmar \\
+\hline
+Hela veckan & Kommunicerat och diskuterat ideér, online och på plats  & Alla & 2 timmar \\
+\hline
+\end{tabular}
+
+
+\vspace{1cm}
+
+\section*{Vecka 11 infört i dagboken av Amelia}
+\begin{tabular}{|p{2cm}|p{8cm}|p{3cm}|p{2cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} & \textbf{Tid} \\
+\hline
+10/3 & Diskuterade modeller & Amelia, Lisa och Alexander & 2 timmar \\
+\hline
+11/3 & Redigera text och skicka till Aila & Amelia, Lisa och Alexander & 2 timmar\\
+\hline
+13/3 & Mittmöte, diskuterade planeringsrapporten och vidare analys av våra modeller & Alla - M(s) & 2 timmar  \\
+\hline
+Hela veckan & Jobbat vidare på LGCP modellen & Mats & 10 timmar  \\
+\hline
+Hela veckan & Kommunicerat och diskuterat ideér, online och på plats  & Alla & 2 timmar \\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+
+\section*{Vecka 12 infört i dagboken av Mats}
+\begin{tabular}{|p{2cm}|p{8cm}|p{3cm}|p{2cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} & \textbf{Tid} \\
+\hline
+21/3 & Jobbat på k funk, iterativa modellen, och texten & Lisa och Alexander & 8 timmar \\
+\hline
+Hela veckan & Skrivit i rapporten och jobbat med olika metoder & Mats & 10 timmar \\
+\hline
+Hela veckan & Kommunicerat och diskuterat ideér, online och på plats  & Alla & 2 timmar \\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+
+\section*{Vecka 13 infört i dagboken av Lisa}
+\begin{tabular}{|p{2cm}|p{8cm}|p{3cm}|p{2cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} & \textbf{Tid} \\
+\hline
+24/3 & Diskuterat Survival functions & Lisa, Alexander och Amelia & 1 timme \\ \hline
+24/3 & Jobbat med presentation för modifierad Thomas & Mats & 3 timme \\ \hline
+25/3 & Fackspråksföreläsning 3 & Lisa, Alexander och Amelia & 2 timmar \\ \hline
+26/3 & Jobbade på den iterativa processen & Alexander och Amelia & 1 timme \\ \hline
+26/3 & Möte med Aila & Alla & 2 timmar \\ \hline
+26/3 & Applicerade Aila's feedback & Lisa, Alexander och Amelia & 2 timmar \\
+\hline
+30/3 & Skrivit i rapport, letat källor, och börjar på resultaten  & Lisa, Alexander, och Amelia & 8 timmar \\ \hline
+Hela veckan & Kommunicerat och diskuterat ideér, online och på plats  & Alla & 2 timmar 
+\\ \hline
+\end{tabular}
+
+\vspace{1cm}
+\section*{Vecka 14 infört i dagboken av Alexander}
+\begin{tabular}{|p{2cm}|p{8cm}|p{3cm}|p{2cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} & \textbf{Tid} \\
+\hline
+31/3 & Skrivit om modifierade Thomas, funderat över olika skattnings metoder för skalningsparameter & Mats& 2 timmar \\ \hline
+1/4 & Gruppdynamik och plan & Lisa, Alexander och Amelia & 3 timmar \\ 
+\hline
+1/4 & Skriva rapport och resultat  & Alexander & 2 timmar \\ 
+\hline
+2/4 & Kodat, skrivit i rapporten, och läst & Alexander, Amelia, och Lisa & 3 timmar \\ 
+\hline
+2/4 & Möte med Aila  & Alla & 1 timme \\ 
+\hline
+2/4 & Diskussion efter möte med Aila  & Alla & 1 timme \\ 
+\hline
+3/4 & Fixat i rapporten  & Alexander, Amelia, och Lisa & 1 timme \\ 
+\hline
+4/4 & Lagt upp alla filer, r-kod och jupyter notebooks på Github & Alexander, Amelia, och Lisa & 1 timme \\ 
+\hline
+4/4 & LGCP kovariater & Mats & 4 timmar \\ 
+\hline
+4/6 & Koda och skrev om LGCP kovariater & Mats & 2 timmar \\ 
+\hline
+5/6 & Diskuterat rapporten & Alexander, Amelia och Lisa & 2 timmar \\ 
+\hline
+6/6 & Lämnat in dagbok och program som kontrollräknar timmar  & Alexander & 1 timme \\ 
+\hline
+Hela veckan & Kommunicerat och diskuterat ideér, online och på plats  & Alla & 2 timmar 
+\\ \hline
+\end{tabular}
+
+\vspace{1cm}
+\section*{Vecka 15 infört i dagboken av Amelia}
+\begin{tabular}{|p{2cm}|p{8cm}|p{3cm}|p{2cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} & \textbf{Tid} \\
+\hline
+7/4 & Lyssna på Mats uppdaterade modell och diskuterat lite rapport & Alla & 2 timmar \\ 
+\hline
+7/4 & Summary statistics och implementera kod & Alexander, Amelia, Lisa & 3 timmar \\ 
+\hline
+8/4 & Envelope kod, fungerar! & Alexander, Lisa och Amelia & 2 timmar \\ 
+\hline
+8/4 & Läst om poisson regression och Generalized additive model & Mats & 2 timmar \\ 
+\hline
+8/4 & Föreläsning om populärvetenskapligt skrivande & Alexander, Amelia, Lisa & 1 timme \\ 
+\hline
+8/4 & Läst i boken av Jesper Møller & Amelia & 2 timmar \\ 
+\hline
+9/4 & Mejl konversation om modeller & Alexander och Mats & 2 timmar \\ 
+\hline
+9/4 & Möte med Aila & Alla & 2 timmar \\ 
+\hline
+9/4 & Ändra rapporten med kommentar från Aila & Alexander, Amelia och Lisa & 2 timmar \\ 
+\hline
+9/4 & Ändra rapporten med kommentar från Aila & Alexander och Amelia & 1 timme \\ 
+\hline
+10/4 & Fackspråksföreläsning 4 & Alexander, Amelia och Lisa & 2 timmar \\ 
+\hline
+11/4 & Läst om Bayesian Optimization, och funderat över andra optimerings metoder & Mats & 4 timmar \\ 
+\hline
+12/4 & Skrivit diskussion och kodat & Alexander, Amelia och Lisa & 9 timmar \\
+\hline
+12/4 & Skrivit om Gaussiska fält, ändrat texten funderat över optimerings metoder & Mats & 6 timmar \\
+\hline
+13/4 & Skrivit diskussion & Lisa & 1 timme \\
+\hline
+13/4 & Funderat över olika optimerings modeller, testar olika funktioner för kluster intensitet & Mats & 3 timmar \\
+\hline
+13/4 & Små justeringar i rapporten & Alexander & 1 timme \\
+\hline
+Hela veckan & Kommunicerat och diskuterat ideér, online och på plats & Alla & 2 timmar 
+\\ \hline
+\end{tabular}
+
+\vspace{1cm}
+\section*{Vecka 16 infört i dagboken av Mats}
+\begin{tabular}{|p{2cm}|p{8cm}|p{3cm}|p{2cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} & \textbf{Tid} \\
+\hline
+14/4 & Jobba mer med poisson regresion, la till en till kovariat & Mats & 5 timmar \\ 
+\hline
+15/4 & Ändra med kommentar från Aila & Alexander & 1 timme \\ 
+\hline
+16/4 & Jobba mer med poisson regresion & Mats & 5 timmar \\ 
+\hline
+16/4 &  Ändra med kommentar från Aila och skriva ut rapport med diskussion & Alexander och Lisa & 5 timmar \\ 
+\hline
+17/4 & Möte med Aila & Lisa, Amelia och Mats & 2 timmar \\ 
+\hline
+18/4 & Jobbat på rapporten & Lisa & 6 timmar \\ 
+\hline
+18/4 & Skrivit, läst om olika tester för spatiala kovariater, byggt en grid search för att hitta parametrar som ger okej  L(r) test & Mats & 8 timmar \\ 
+\hline
+18/4 & Jobbat på rapporten & Amelia & 8 timmar \\ 
+\hline
+19/4 & Jobbat på rapporten & Lisa & 6 timmar \\ 
+\hline
+19/4 & Jobbat på rapporten & Mats & 5 timmar \\ 
+\hline
+19/4 & Jobbat på rapporten & Alexander & 3 timmar \\ 
+\hline
+19/4 & Jobbat på rapporten & Amelia & 3 timmar \\ 
+\hline
+20/4 & Jobbat på rapporten & Amelia och Lisa & 9 timmar \\ 
+\hline
+20/4 & Jobbat på rapporten & Alexander & 2 timmar \\ 
+\hline
+20/4 & Jobbat på den populärvetenskapliga presentationen & Amelia & 1 timme \\ 
+\hline
+Hela veckan & Kommunicerat och diskuterat ideér, online och på plats & Alla & 3 timmar \\ 
+\hline
+\end{tabular}
+
+\vspace{1cm}
+\section*{Vecka 17 infört i dagboken av Lisa}
+\begin{tabular}{|p{2cm}|p{8cm}|p{3cm}|p{2cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} & \textbf{Tid} \\
+\hline
+21/4 & Populärvetenskaplig text & Amelia &  5 timmar\\ 
+\hline
+21/4 & Läst och kommentarer inför handledning &  Lisa & 1 timme \\ 
+\hline 
+25/4 & Fackspråk Handledningstillfälle 2 & Alla & 1 timme \\ 
+\hline
+25/4 & Plottat F funktionen & Alexander & 3 timmar \\ 
+\hline 
+26/4 & Tagit bilder för omslaget & Lisa och Alexander & 3 timmar \\ 
+\hline
+Hela veckan & Kommunicerat och diskuterat ideér, online och på plats & Alla & 2 timmar \\ 
+\hline
+\end{tabular}
+
+\vspace{1cm}
+\section*{Vecka 18 infört i dagboken av Alexander}
+\begin{tabular}{|p{2cm}|p{8cm}|p{3cm}|p{2cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} & \textbf{Tid} \\
+\hline
+28/4 & Fixa figurer & Alexander &  2 timmar\\   
+\hline
+29/4 & Jobbat på rapporten & Lisa &  1 timme \\   
+\hline
+29/4 & Funktioner & Alexander &  2 timmar \\   
+\hline
+29/4 & Möte med Aila & Alla &  1 timme \\   
+\hline
+29/4 & Diskussion efter möte med Aila & Alla &  1 timme \\
+\hline
+1/5 & Populärvetenskaplig text & Amelia &  5 timmar \\   
+\hline
+1/5 & Poisson & Lisa &  1 timme \\   
+\hline
+1/5 & Plots & Alexander &  2 timmar \\   
+\hline
+1/5 & Jobbat på texten & Mats & 3 timmar \\   
+\hline
+2/5 & Plots & Alexander &  5 timmar \\   
+\hline
+2/5 & Populärvetenskaplig text och jobbat på texten & Amelia &  4 timmar \\   
+\hline
+2/5 & Möte & Alla &  2 timmar \\   
+\hline
+2/5 & Text och feedback & Lisa & 3 timmar \\   
+\hline
+4/5 & Populärvetenskaplig text & Amelia &  2 timmar \\   
+\hline
+4/5 & Plots & Alexander &  10 timmar \\   
+\hline
+4/5 & Skriva i texten & Lisa &  10 timmar \\   
+\hline
+4/5 & Skriva i texten och kommunication & Mats &  8 timmar \\   
+\hline
+Hela veckan & Kommunicerat och diskuterat ideér, online och på plats & Alla & 2 timmar \\ 
+\hline
+\end{tabular}
+
+\vspace{1cm}
+\section*{Vecka 19 infört i dagboken av Amelia}
+\begin{tabular}{|p{2cm}|p{8cm}|p{3cm}|p{2cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} & \textbf{Tid} \\
+\hline
+5/5 & Fixa figurer & Alexander &  4 timmar \\   
+\hline
+5/5 & Jobbat på rapporten & Lisa &  6 timmar \\   
+\hline
+6/5 & Jobbat på rapporten & Lisa &  7 timmar \\   
+\hline
+6/5 & Jobbat på rapporten & Amelia &  10 timmar \\   
+\hline
+6/5 & Jobbat på rapporten & Alexander &  6 timmar \\   
+\hline
+6/5 & Jobbat på rapporten & Mats &  3 timmar \\  
+\hline
+7/5 & Möte med Aila & Alla &  2 timmar \\  
+\hline
+7/5 & Jobbat på rapporten & Amelia &  2 timmar \\  
+\hline
+7/5 & Plots & Alexander &  2 timmar \\  
+\hline
+8/5 & Jobbat på rapporten & Amelia &  6 timmar \\  
+\hline
+8/5 & Jobbat på rapporten/plots & Alexander & 9 timmar \\  
+\hline
+8/5 & Jobbat på rapporten & Lisa &  6 timmar \\  
+\hline
+9/5 & Jobbat på rapporten & Lisa &  1 timme \\  
+\hline
+9/5 & Jobbat på rapporten/plots & Alexander &  5 timmar \\ 
+\hline
+10/5 & Jobbat på rapporten & Lisa &  6 timmar \\  
+\hline
+10/5 & Jobbat på rapporten & Alexander &  9 timmar \\  
+\hline
+10/5 & Jobbat på rapporten & Amelia &  5 timmar \\  
+\hline
+10/5 & Jobbat på rapporten & Mats &  5 timmar \\  
+\hline
+11/5 & Jobbat på rapporten & Lisa &  10 timmar \\  
+\hline
+11/5 & Jobbat på rapporten & Alexander &  13 timmar \\  
+\hline
+11/5 & Jobbat på rapporten & Amelia &  11 timmar \\  
+\hline
+11/5 & Jobbat på rapporten & Mats &  5 timmar \\  
+\hline
+Hela veckan & Kommunicerat och diskuterat idéer, online och på plats & Alla & 4 timmar \\ 
+\hline
+\end{tabular}
+
+\vspace{1cm}
+\section*{Vecka 20 infört i dagboken av Mats}
+\begin{tabular}{|p{2cm}|p{8cm}|p{3cm}|p{2cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} & \textbf{Tid} \\
+\hline
+12/5 & Jobbat på rapporten & Alexander &  4 timmar \\  
+\hline
+12/5 & Jobbat på rapporten & Lisa &  4 timmar \\   
+\hline
+12/5 & Möte med Aila & Alla &  1 timme \\   
+\hline
+12/5 & Jobbat på rapporten & Alexander &  5 timmar \\  
+\hline
+12/5 & Jobbat på rapporten & Lisa &  5 timmar \\   
+\hline
+12/5 & Jobbat på rapporten & Amelia &  11 timmar \\   
+\hline
+13/5 & Jobbat på rapporten & Alexander &  15 timmar \\ 
+\hline
+13/5 & Jobbat på rapporten & Lisa &  15 timmar \\      
+\hline
+13/5 & Fackspråk: Föreläsning 5 & Amelia &  1 timme \\ 
+\hline
+13/5 & Jobbat på rapporten & Amelia &  11 timmar \\   
+\hline
+15/5 & Skrivit opponeringsrapport & Lisa &  2 timmar \\      
+\hline
+16/5 & Skrivit opponeringsrapport & Lisa &  3 timmar \\      
+\hline
+16/5 & Skrivit opponeringsrapport & Lisa &  1 timme \\
+\hline
+Hela veckan & Kommunicerat och diskuterat idéer, online och på plats & Alla & 4 timmar \\ 
+\hline
+\end{tabular}
+
+\vspace{1cm}
+\section*{Vecka 21 infört i dagboken av Lisa}
+\begin{tabular}{|p{2cm}|p{8cm}|p{3cm}|p{2cm}|}
+\hline
+\textbf{Datum} & \textbf{Vad} & \textbf{Vem} & \textbf{Tid} \\
+\hline
+19/5 & Jobbat på opponeringsrapporten & Lisa & 3 timmar \\  
+\hline
+19/5 & Jobbat på opponeringsrapporten & Alexander & 3 timmar \\  
+\hline
+19/5 & Jobbat på opponeringsrapporten & Amelia & 3 timmar \\  
+\hline
+19/5 & Möte om opponeringen & Alla & 2 timmar \\  
+\hline
+20/5 & Opponering förberedelse & Lisa & 1 timme \\  
+\hline
+20/5 & Handledningstillfälle 3 & Alla & 1 timme \\  
+\hline
+21/5 & Opponeringspresentation & Lisa & 3 timmar \\  
+\hline
+21/5 & Jobbat på opponeringsrapporten & Alexander & 2 timmar \\  
+\hline
+21/5 & Jobbat med opponering & Amelia & 5 timmar \\  
+\hline
+22/5 & Opponeringspresentation & Lisa & 5 timmar \\  
+\hline
+22/5 & Opponeringspresentation & Alexander & 5 timmar \\  
+\hline
+22/5 & Opponeringspresentation & Amelia & 6 timmar \\  
+\hline
+23/5 & Opponeringspresentation & Lisa & 1 timme \\  
+\hline
+23/5 & Opponeringspresentation & Alexander & 1 timme \\  
+\hline
+23/5 & Opponeringspresentation inför Aila & Amelia, Alexander, Lisa & 1 timme \\  
+\hline
+23/5 & Opponeringspresentation & Amelia & 5 timmar \\  
+\hline
+23/5 & Opponeringspresentation & Lisa & 5 timmar \\  
+\hline
+23/5 & Opponeringspresentation & Alexander & 5 timmar \\  
+25/5 & Opponeringspresentation & Amelia & 7 timmar \\  
+\hline
+25/5 & Opponeringspresentation & Lisa & 7 timmar \\  
+\hline
+25/5 & Opponeringspresentation & Alexander & 7 timmar \\  
+\hline
+\end{tabular}
+
+
+\section*{Total tid}
+
+\begin{tabular}{|p{2cm}|p{5cm}|}
+\hline
+\textbf{Namn} & \textbf{Total tid} \\
+     \hline
+     Lisa &  245 (233) timmar \\
+     \hline
+     Amelia &  222 (215) timmar \\
+     \hline
+     Alexander & 247 (240) timmar \\
+     \hline
+     Mats &  202 (310) timmar \\
+\hline
+\end{tabular}
+
+\end{document}
+

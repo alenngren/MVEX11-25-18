@@ -688,3 +688,535 @@ fs <- Fest(X, correction='rs', probs = fs_probs)$rs
 fs_thom <- Fest(simulate(kppm(X~1, "Thomas"), nsim=1)[[1]], correction='rs', probs = fs_probs)$rs
 length(fs)
 length(fs_thom)
+
+
+plot(distmap(X)) # pixel image of empty-space distances
+plot(pairdist(X))
+plot(distfun(X))
+
+U <- runifpoint(3, Window(X))
+plot(U)
+Z <- distmap(X)
+
+nncross(U, X, what='dist')
+f <- distfun(X)
+plot(f(U))
+
+plot(dirichlet(X))
+stienen(X)
+
+Xset <- discs(X, eps=0.1, mask=TRUE)
+
+
+X_x <- X
+
+width <- sidelengths(Window(X_x))[1]
+# unitname(X_x) <- list("m", "m", 886/width)
+
+anemones
+
+X_x <- rescale(X_x)
+marks(X_x)
+
+X_xset <- discs(X_x, eps=0.1, mask=TRUE)
+
+Hanem <- Hest(X_x, conditional = TRUE)
+Hsmooth <- Smooth(Hanem, which ="hazard")
+plot(Hsmooth)
+flipped <- flipxy(heather$fine)
+plot(flipped)
+plot(heather$fine)
+
+
+
+# Try load a folder iterativ -----
+library(spatstat.geom)
+library(spatstat.core)
+library(dplyr)
+
+# iterpath <- '/Users/alexander/Chalmers/MVEX11-25-18/dataframes/path'
+# Set the directory containing your CSVs
+csv_dir <- "/Users/alexander/Chalmers/MVEX11-25-18/dataframes/path"
+csv_files <- list.files(path = csv_dir, pattern = "\\.csv$", full.names = TRUE)
+
+# Initialize list to hold L-function results
+L_results <- vector("list", length(csv_files))
+
+# Loop over each CSV file
+for (i in seq_along(csv_files)) {
+  # Read CSV
+  df <- read.csv(csv_files[i], header = TRUE, col.names = c("x", "y"))
+  
+  # Define observation window based on the data
+  xrange <- range(df$x)
+  yrange <- range(df$y)
+  win <- owin(xrange, yrange)
+  
+  # Convert to point pattern
+  pp <- ppp(x = df$X15.332939012831414, y = df$X24.17520756674965, window = square(40))
+  
+  # Compute L-function
+  L <- Lest(pp, correction = "Ripley")$iso
+  
+  # Store result with repetition index
+  L_results[i] <- L
+  # L_results[[i]] <- data.frame(rep = i, r = L$r, theo = L$theo, Lr = L$iso)
+}
+
+# Combine all into one data frame
+L_combined <- bind_rows(L_results)
+
+
+# 
+library(spatstat.geom)
+library(spatstat.core)
+# Alex iterativ works!!! Store confidence hölje här -----
+# List your CSV files
+# csv_dir <- "your/csv/folder/path"
+# csv_files <- list.files(path = csv_dir, pattern = "\\.csv$", full.names = TRUE)
+filename <- "/Users/alexander/Chalmers/MVEX11-25-18/ERIKA.rds"
+ERIKA <- readRDS(filename)
+x <- ERIKA$VES13$small$x
+y <- ERIKA$VES13$small$y
+x_p <- ERIKA$VES13$large$x
+y_p <- ERIKA$VES13$large$y
+
+# Load the ppp data  ----
+X <- ppp(x=x, y=y, window=square(40))
+
+csv_files <- list.files(path = csv_dir, pattern = "\\.csv$", full.names = TRUE)
+rx <- Lest(X, correction="iso")$r
+rx
+# Initialize a list to hold the Lr values
+L_iso_values <- vector("list", length(csv_files))
+
+# Loop through each file
+for (i in seq_along(csv_files)) {
+  df <- read.csv(csv_files[i], header = FALSE)
+  colnames(df) <- c("x", "y")
+  
+  # Set window (adjust as needed)
+  pp <- ppp(x = df$x, y = df$y, window = square(40))
+  
+  # Compute L-function
+  L <- Lest(pp, correction = "iso")$iso - rx
+  
+  # Store only the 'iso' values (as a row)
+  L_iso_values[[i]] <- L # take away point 
+}
+
+# Convert list of vectors to data frame
+L_matrix <- do.call(rbind, L_iso_values)
+L_matrix <- t(L_matrix)
+L_df <- as.data.frame(L_matrix)
+# rownames(L_df) <- paste0("rep_", seq_along(csv_files))
+# View(L_df)
+
+
+r <- seq(0, 10, length.out = 100)
+# Beräkna 2.5:e och 97.5:e percentilen för varje punkt
+lower <- apply(L_df, 1, quantile, probs = 0.025)
+upper <- apply(L_df, 1, quantile, probs = 0.975)
+mean_sim <- apply(L_df, 1, mean)
+
+# length(r)
+# length(rx)
+# length(mean_sim)
+
+l_X <- Lest(X, correction = "iso")
+{
+png("conf-iter10-col.png", width=694, height= 482)
+plot(rx, l_X$iso-rx, type = "l", col = "black", lwd = 2, lty=1,
+     ylim = range(0, 6),
+     ylab = expression(L(r)-r), xlab = expression(italic(r)),
+     cex.main = 2, cex.lab = 1.2, cex.axis = 1.5,
+     main = "Konfidenshölje för Iterativ Thomasprocess")
+
+coli <- jet_colors[2]
+rgb_vals <- col2rgb(coli)
+polygon(c(rx, rev(rx)), c(upper, rev(lower)),
+        col = rgb(rgb_vals[1]/255,rgb_vals[2]/255,rgb_vals[3]/255, 0.1), border = NA)
+
+
+# Lägg till medelvärdeskurvan ovanpå igen (för tydlighet)
+lines(rx, mean_sim, col = jet_colors[2], lwd = 2, lty=2)
+# lines(rx, Lest(X, Lest, correction='isotropic')$iso - E$r, lwd=2)
+lines(rx, l_X$theo-rx, lwd=2, lty=2, col='red')
+
+legend("topleft", legend = c('Data', 'Iterativ','Poisson'),
+       col = c('black',jet_colors[2], 'red'), lty = c(1,2,2), lwd=c(2,1,1)) 
+
+dev.off()
+}
+
+# Plot föräldrar, plot döttrar
+# Set up a tight layout
+
+# par(mfrow = c(1, 2), mar = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), xpd = NA)
+
+# Plot without titles or excess margins
+plot(X_p, main = "", axes = FALSE, box = FALSE)
+plot(X, main = "", axes = FALSE, box = FALSE)
+
+# Reset layout and par
+dev.off()       # Closes current graphics device (if open)
+graphics.off()  # Closes all active graphics devices
+par(mfrow = c(1, 1))   # Reset to single panel
+layout(1)             # Reset layout
+# Save side-by-side plots with minimal whitespace
+png("parents-offspring.png", width = 1000, height = 500)  # Adjust as needed
+# png("parents-offspring.png", width = 1000, height = 500, res = 300) # one adjust 
+par(mfrow = c(1, 2), mar = c(1, 1, 1, 1), oma = c(0, 0, 0, 0))
+plot(X_p, main = "", axes = FALSE, box = FALSE)
+plot(X, main = "", axes = FALSE, box = FALSE)
+dev.off()
+
+
+
+png("parents-offspring.png", width = 1000, height = 500, res = 300)
+# Define layout: 3 columns, 1 row → only fill 1st and 3rd
+layout(matrix(c(1, 0, 2), nrow = 1, byrow = TRUE), widths = c(1, 1, 1))
+
+# Optional: Reduce margins tightly
+par(mar = c(1, 1, 1, 1), oma = c(0, 0, 0, 0))
+
+# Plot 1st (left) plot
+plot(X_p, main = "", axes = FALSE, box = FALSE)
+
+# (Middle panel is blank automatically)
+
+# Plot 2nd (right) plot
+plot(X, main = "", axes = FALSE, box = FALSE)
+
+dev.off()
+
+
+
+# Alexander get mats 3.5 ---- 
+# List your CSV files
+# csv_dir <- "your/csv/folder/path"
+csv_dir <- "/Users/alexander/Chalmers/MVEX11-25-18/dataframes/punkter_1"
+# csv_files <- list.files(path = csv_dir, pattern = "\\.csv$", full.names = TRUE)
+csv_files <- list.files(path = csv_dir, pattern = "\\.csv$", full.names = TRUE)
+rx <- Lest(X, correction="iso")$r # ves13 r values 
+# rx
+# Initialize a list to hold the Lr values
+L_iso_values <- vector("list", length(csv_files))
+
+# Loop through each file
+for (i in seq_along(csv_files)) {
+  df <- read.csv(csv_files[i], header = FALSE, skip = 1)
+  colnames(df) <- c("x", "y")
+  
+  # Set window (adjust as needed)
+  pp <- ppp(x = df$x, y = df$y, window = square(40))
+  
+  # Compute L-function
+  L <- Lest(pp, correction = "iso")$iso - rx
+  
+  # Store only the 'iso' values (as a row)
+  L_iso_values[[i]] <- L
+}
+
+# Convert list of vectors to data frame
+L_matrix <- do.call(rbind, L_iso_values)
+L_matrix <- t(L_matrix)
+L_df35 <- as.data.frame(L_matrix)
+# rownames(L_df) <- paste0("rep_", seq_along(csv_files))
+View(L_df35) # check if it works 
+
+
+# r <- seq(0, 10, length.out = 100) # not necessarY
+# Beräkna 2.5:e och 97.5:e percentilen för varje punkt
+lower <- apply(L_df35, 1, quantile, probs = 0.025)
+upper <- apply(L_df35, 1, quantile, probs = 0.975)
+mean_sim <- apply(L_df35, 1, mean)
+
+# length(r)
+# length(rx)
+# length(mean_sim)
+
+## Itensitets-styrd Thomasprocess
+l_X <- Lest(X, correction = "iso") # ves13 
+# par(mfrow=c(1,1)) # standard plot 
+plot(rx, l_X$iso-rx, type = "l", col = "black", lwd = 2, lty=1,
+     ylim = range(0, 6),
+     ylab = expression(L(r)-r), xlab = expression(italic(r)),
+     main = "Konfidenshölje för Intensitetsstyrd Poissonprocess")
+
+coli <- jet_colors[13]
+rgb_vals <- col2rgb(coli)
+polygon(c(rx, rev(rx)), c(upper, rev(lower)),
+        col = rgb(rgb_vals[1]/255,rgb_vals[2],rgb_vals[3], 0.1), border = NA)
+        #col = rgb(0.8, 0.8, 1, 0.5), border = NA)
+
+# Lägg till medelvärdeskurvan ovanpå igen (för tydlighet)
+lines(rx, mean_sim, col = jet_colors[13], lwd = 2, lty=2)
+# lines(rx, Lest(X, Lest, correction='isotropic')$iso - E$r, lwd=2)
+lines(rx, l_X$theo-rx, lwd=2, lty=2, col='red')
+
+legend("topleft", legend = c('VES13-data', 'Intensitetsstyrd','Poisson'),
+       col = c('black',jet_colors[13], 'red'), lty = c(1,2,2), lwd=c(2,1,1)) 
+
+# stop 3.5 ----- 
+# Save original par settings
+# opar <- par(no.readonly = TRUE)
+
+# Your plotting code here
+# e.g. par(mfrow = c(2, 2))
+# plot(...)
+
+# Reset to original settings
+# par(opar)
+
+# par(mfrow = c(1, 1), mar = c(5.1, 4.1, 4.1, 2.1), oma = c(0, 0, 0, 0),
+#     mgp = c(3, 1, 0), las = 0, pch = 1, cex = 1, col = "black", bg = "transparent",
+#     xaxs = "r", yaxs = "r", xpd = FALSE, bty = "o")
+
+
+
+# Alexander get mats 3.5 new version ---- 
+# List your CSV files
+# csv_dir <- "your/csv/folder/path"
+csv_dir <- "/Users/alexander/Chalmers/MVEX11-25-18/dataframes/punkterz_1" # Intensitets Poisson
+# csv_files <- list.files(path = csv_dir, pattern = "\\.csv$", full.names = TRUE)
+csv_files <- list.files(path = csv_dir, pattern = "\\.csv$", full.names = TRUE)
+rx <- Lest(X, correction="iso")$r # ves13 r values 
+# rx
+# Initialize a list to hold the Lr values
+L_iso_values <- vector("list", length(csv_files))
+
+# Loop through each file
+for (i in seq_along(csv_files)) {
+  df <- read.csv(csv_files[i], header = FALSE, skip = 1)
+  colnames(df) <- c("x", "y")
+  
+  # Set window (adjust as needed)
+  pp <- ppp(x = df$x, y = df$y, window = square(40))
+  
+  # Compute L-function
+  L <- Lest(pp, correction = "iso")$iso - rx
+  
+  # Store only the 'iso' values (as a row)
+  L_iso_values[[i]] <- L
+}
+
+# Convert list of vectors to data frame
+L_matrix <- do.call(rbind, L_iso_values)
+L_matrix <- t(L_matrix)
+L_df35 <- as.data.frame(L_matrix)
+# rownames(L_df) <- paste0("rep_", seq_along(csv_files))
+# View(L_df35) # check if it works 
+
+
+# r <- seq(0, 10, length.out = 100) # not necessarY
+# Beräkna 2.5:e och 97.5:e percentilen för varje punkt
+lower <- apply(L_df35, 1, quantile, probs = 0.025)
+upper <- apply(L_df35, 1, quantile, probs = 0.975)
+mean_sim <- apply(L_df35, 1, mean)
+
+# length(r)
+# length(rx)
+# length(mean_sim)
+
+l_X <- Lest(X, correction = "iso") # ves13 
+# par(mfrow=c(1,1)) # standard plot 
+{
+png("conf-intpois-col.png", width=694, height= 482)
+plot(rx, l_X$iso-rx, type = "l", col = "black", lwd = 2, lty=1,
+     ylim = range(0, 6),
+     ylab = expression(L(r)-r), xlab = expression(italic(r)),
+     cex.main = 2, cex.lab = 1.2, cex.axis = 1.5,
+     main = "Konfidenshölje för Intensitetsstyrd Poissonprocess")
+
+coli <- jet_colors[13]
+rgb_vals <- col2rgb(coli)
+polygon(c(rx, rev(rx)), c(upper, rev(lower)),
+        col = rgb(rgb_vals[1]/255,rgb_vals[2],rgb_vals[3], 0.1), border = NA)
+#col = rgb(0.8, 0.8, 1, 0.5), border = NA)
+
+# Lägg till medelvärdeskurvan ovanpå igen (för tydlighet)
+lines(rx, mean_sim, col = jet_colors[13], lwd = 2, lty=2)
+# lines(rx, Lest(X, Lest, correction='isotropic')$iso - E$r, lwd=2)
+lines(rx, l_X$theo-rx, lwd=2, lty=2, col='red')
+
+legend("topleft", legend = c('Data', 'Intensitetsstyrd','Poisson'),
+       col = c('black',jet_colors[13], 'red'), lty = c(1,2,2), lwd=c(2,1,1)) 
+dev.off()
+}
+# stop 3.5 new version ----- 
+
+
+
+
+# 3.5 new new points (hierarkisk) ----
+
+csv_dir <- "/Users/alexander/Chalmers/MVEX11-25-18/dataframes/LGCP_punkter_2"
+# csv_files <- list.files(path = csv_dir, pattern = "\\.csv$", full.names = TRUE)
+csv_files <- list.files(path = csv_dir, pattern = "\\.csv$", full.names = TRUE)
+rx <- Lest(X, correction="iso")$r # ves13 r values 
+# rx
+# Initialize a list to hold the Lr values
+L_iso_values <- vector("list", length(csv_files))
+
+# Loop through each file
+for (i in seq_along(csv_files)) {
+  df <- read.csv(csv_files[i], header = FALSE, skip = 1)
+  colnames(df) <- c("x", "y")
+  
+  # Set window (adjust as needed)
+  pp <- ppp(x = df$x, y = df$y, window = square(40))
+  
+  # Compute L-function
+  L <- Lest(pp, correction = "iso")$iso - rx
+  
+  # Store only the 'iso' values (as a row)
+  L_iso_values[[i]] <- L
+}
+
+# Convert list of vectors to data frame
+L_matrix <- do.call(rbind, L_iso_values)
+L_matrix <- t(L_matrix)
+L_df35 <- as.data.frame(L_matrix)
+# rownames(L_df) <- paste0("rep_", seq_along(csv_files))
+# View(L_df35) # check if it works 
+
+
+# r <- seq(0, 10, length.out = 100) # not necessarY
+# Beräkna 2.5:e och 97.5:e percentilen för varje punkt
+lower <- apply(L_df35, 1, quantile, probs = 0.025)
+upper <- apply(L_df35, 1, quantile, probs = 0.975)
+mean_sim <- apply(L_df35, 1, mean)
+
+# length(r)
+# length(rx)
+# length(mean_sim)
+
+l_X <- Lest(X, correction = "iso") # ves13 
+# par(mfrow=c(1,1)) # standard plot 
+par(
+  mfrow = c(1, 1),      # Single plot layout
+  mar   = c(5.1, 4.1, 4.1, 2.1),  # Margins: bottom, left, top, right
+  oma   = c(0, 0, 0, 0),          # Outer margins
+  mai   = c(1.02, 0.82, 0.82, 0.42), # Inches margin alternative to mar
+  pch   = 1,            # Default point character (circle)
+  cex   = 1,            # Character expansion (scaling)
+  las   = 0,            # Axis labels orientation (0 = parallel to axis)
+  xpd   = FALSE,        # Clipping of plotting to device region
+  bty   = "o",          # Box type around plot
+  tcl   = -0.5,         # Length of tick marks
+  mgp   = c(3, 1, 0),   # Margin line for axis title, labels, line
+  col   = "black",      # Default color
+  lty   = 1,            # Line type
+  lwd   = 1,            # Line width
+  bg    = "transparent" # Background color
+)
+
+
+{ # new new mats plot 
+  png("conf-hierarkisk1-col.png", width=694, height= 482)
+  plot(rx, l_X$iso-rx, type = "l", col = "black", lwd = 2, lty=1,
+       ylim = range(0, 8),
+       ylab = expression(L(r)-r), xlab = expression(italic(r)),
+       cex.main = 2, cex.lab = 1.2, cex.axis = 1.5,
+       main = "Konfidenshölje för Hierarkisk Poissonprocess")
+  
+  coli <- jet_colors[10]
+  rgb_vals <- col2rgb(coli)
+  polygon(c(rx, rev(rx)), c(upper, rev(lower)),
+          col = rgb(rgb_vals[1]/255,rgb_vals[2]/255,rgb_vals[3]/255, 0.1), border = NA)
+  #col = rgb(0.8, 0.8, 1, 0.5), border = NA)
+  
+  # Lägg till medelvärdeskurvan ovanpå igen (för tydlighet)
+  lines(rx, mean_sim, col = jet_colors[10], lwd = 2, lty=2)
+  # lines(rx, Lest(X, Lest, correction='isotropic')$iso - E$r, lwd=2)
+  lines(rx, l_X$theo-rx, lwd=2, lty=2, col='red')
+  
+  legend("topleft", legend = c('data', 'Hierarkisk','Poisson'),
+         col = c('black',jet_colors[10], 'red'), lty = c(1,2,2), lwd=c(2,1,1)) 
+  dev.off()
+}
+# stop 3.5 new new version ----- 
+
+# Envelopes for other functions! and make it dynamic ---- 
+csv_dir <- "/Users/alexander/Chalmers/MVEX11-25-18/dataframes/LGCP_punkter_2"
+# csv_files <- list.files(path = csv_dir, pattern = "\\.csv$", full.names = TRUE)
+csv_files <- list.files(path = csv_dir, pattern = "\\.csv$", full.names = TRUE)
+rx <- Lest(X, correction="iso")$r # ves13 r values 
+# rx
+# Initialize a list to hold the Lr values
+L_iso_values <- vector("list", length(csv_files))
+
+# Loop through each file
+for (i in seq_along(csv_files)) {
+  df <- read.csv(csv_files[i], header = FALSE, skip = 1)
+  colnames(df) <- c("x", "y")
+  
+  # Set window (adjust as needed)
+  pp <- ppp(x = df$x, y = df$y, window = square(40))
+  
+  # Compute L-function
+  L <- Lest(pp, correction = "iso")$iso - rx
+  
+  # Store only the 'iso' values (as a row)
+  L_iso_values[[i]] <- L
+}
+
+# Convert list of vectors to data frame
+L_matrix <- do.call(rbind, L_iso_values)
+L_matrix <- t(L_matrix)
+L_df35 <- as.data.frame(L_matrix)
+# rownames(L_df) <- paste0("rep_", seq_along(csv_files))
+# View(L_df35) # check if it works 
+
+
+# r <- seq(0, 10, length.out = 100) # not necessarY
+# Beräkna 2.5:e och 97.5:e percentilen för varje punkt
+lower <- apply(L_df35, 1, quantile, probs = 0.025)
+upper <- apply(L_df35, 1, quantile, probs = 0.975)
+mean_sim <- apply(L_df35, 1, mean)
+
+l_X <- Lest(X, correction = "iso") # ves13 
+# par(mfrow=c(1,1)) # standard plot 
+
+{ # new new mats plot 
+  # png("conf-hierarkisk1-col.png", width=694, height= 482)
+  plot(rx, l_X$iso-rx, type = "l", col = "black", lwd = 2, lty=1,
+       ylim = range(0, 8),
+       ylab = expression(L(r)-r), xlab = expression(italic(r)),
+       cex.main = 2, cex.lab = 1.2, cex.axis = 1.5,
+       main = "Konfidenshölje för Hierarkisk Poissonprocess")
+  
+  coli <- jet_colors[10]
+  rgb_vals <- col2rgb(coli)
+  polygon(c(rx, rev(rx)), c(upper, rev(lower)),
+          col = rgb(rgb_vals[1]/255,rgb_vals[2]/255,rgb_vals[3]/255, 0.1), border = NA)
+  #col = rgb(0.8, 0.8, 1, 0.5), border = NA)
+  
+  # Lägg till medelvärdeskurvan ovanpå igen (för tydlighet)
+  lines(rx, mean_sim, col = jet_colors[10], lwd = 2, lty=2)
+  # lines(rx, Lest(X, Lest, correction='isotropic')$iso - E$r, lwd=2)
+  lines(rx, l_X$theo-rx, lwd=2, lty=2, col='red')
+  
+  legend("topleft", legend = c('data', 'Hierarkisk','Poisson'),
+         col = c('black',jet_colors[10], 'red'), lty = c(1,2,2), lwd=c(2,1,1)) 
+  # dev.off()
+}
+
+
+
+
+# gpt code for 
+
+# Load spatstat package
+library(spatstat.core)  # for Gest and envelopes
+library(spatstat.geom)  # for point patterns
+
+# Generate a random point pattern (CSR)
+pp <- rpoispp(100)  # 100 points in unit square
+
+# Compute G function with CSR simulation envelope
+Genv <- envelope(pp, Gest, nsim=99, rank=1, global=TRUE)
+
+# Plot the result
+plot(Genv, main="Nearest Neighbour Function G(r) with CSR Envelope")
